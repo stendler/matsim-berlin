@@ -93,9 +93,9 @@ public class InitLocationChoice implements MATSimAppCommand, PersonAlgorithm {
 
 	private Network network;
 
-	private AtomicLong total = new AtomicLong();
+	private final AtomicLong total = new AtomicLong();
 
-	private AtomicLong warning = new AtomicLong();
+	private final AtomicLong warning = new AtomicLong();
 
 	private ProgressBar pb;
 
