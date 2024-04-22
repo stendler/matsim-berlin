@@ -40,7 +40,7 @@ public class RunQsimComparison extends RunOpenBerlinScenario {
 		//config.controler().setWriteEventsInterval(0);
 
 		// rust_qsim has no pt
-		config.transit().setUseTransit(false);
+		//config.transit().setUseTransit(false);
 
 		return config;
 	}
