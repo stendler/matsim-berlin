@@ -22,7 +22,7 @@ import java.time.Instant;
 /**
  * This class runs one iteration of MATSim and tracks the execution time into a csv file.
  */
-public class RunQsimComparison extends RunOpenBerlinScenario {
+public class RunQsimComparison extends OpenBerlinScenario {
 
 	public static void main(String[] args) {
 		MATSimApplication.run(RunQsimComparison.class, args);
@@ -32,9 +32,9 @@ public class RunQsimComparison extends RunOpenBerlinScenario {
 	protected Config prepareConfig(Config config) {
 
 		config = super.prepareConfig(config);
-		config.controler().setOverwriteFileSetting(OutputDirectoryHierarchy.OverwriteFileSetting.deleteDirectoryIfExists);
-		config.controler().setFirstIteration(0);
-		config.controler().setLastIteration(0);
+		config.controller().setOverwriteFileSetting(OutputDirectoryHierarchy.OverwriteFileSetting.deleteDirectoryIfExists);
+		config.controller().setFirstIteration(0);
+		config.controller().setLastIteration(0);
 
 		// don't write any events, as this slows down the qsim
 		//config.controler().setWriteEventsInterval(0);
