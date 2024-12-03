@@ -4,6 +4,8 @@
 # EXAMPLE:
 # ./run-profiler.sh --output /fast/$USER/matsim-berlin-1 async-profiler debug --events cache-misses,alloc,lock -classpath matsim-berlin-6.3-v6.0-200-g0dcee95-dirty.jar org.matsim.run.RunQsimComparison --iterations=2 --1pct
 # (--output and run are added by this script at the end)
+# ENVIRONMENT VARIABLES
+# - TMPDIR: if specified, use this path as JFRs temporary disk storage (`repository` option). Defaults to /tmp/
 set -e
 
 # Variations:
@@ -59,10 +61,14 @@ fi
 profile_output="$output_folder/${name}.jfr"
 mkdir --parents "$output_folder/matsim-berlin"
 
+tmp=/tmp/
+if [ -d "$TMPDIR" ]; then
+  tmp="$TMPDIR"
+fi
 
 if [ "jfr" = "$profiler" ]; then
   jfr_opts="-XX:StartFlightRecording=name=\"$name\",dumponexit=true,maxsize=0,filename=\"$profile_output\"$profile"
-  jfr_opts="$jfr_opts -XX:FlightRecorderOptions=stackdepth=2048"
+  jfr_opts="$jfr_opts -XX:FlightRecorderOptions=stackdepth=2048,repository=\"$tmp\""
 elif [ "async-profiler" = "$profiler" ]; then
   async_profiler_path="$XDG_DATA_HOME/me.bechberger.ap-loader/3.0/lib/libasyncProfiler.so"
   jfr_opts="-agentpath:$async_profiler_path=start,event=$events,loglevel=INFO,file=$profile_output,alloc=2m,jfrsync,jfr"
