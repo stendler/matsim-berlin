@@ -1,5 +1,5 @@
 #!/bin/bash --login
-#SBATCH --time=12:00:00
+#SBATCH --time=30:00:00
 #SBATCH --partition=smp
 #SBATCH --output=/fast/%u/logfile_%x-%j.log
 #SBATCH --nodes=1                       # How many computing nodes do you need (for MATSim usually 1)
