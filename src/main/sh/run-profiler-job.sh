@@ -12,6 +12,7 @@
 
 date
 hostname
+lscpu
 
 # ensure SLURM_JOB_NAME is set
 if [ -z "$SLURM_JOB_NAME" ]; then
@@ -19,6 +20,7 @@ if [ -z "$SLURM_JOB_NAME" ]; then
   exit 2
 fi
 
+printf "TMPDIR set to %s" "$TMPDIR\n"
 # jfr went out of disk to write - check potential directories, where it will write to
 df -h /tmp /fast /scratch
 
