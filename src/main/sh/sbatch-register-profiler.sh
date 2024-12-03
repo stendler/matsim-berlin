@@ -9,7 +9,7 @@ sbatch_command() (
   run="$1"
   shift 1
 
-  sbatch --job-name="matsim-berlin-profiling-$run-$i" --profile=TASK ./run-profiler-job.sh "$@" --runId="matsim-berlin-6.3-$run"
+  sbatch --job-name="matsim-berlin-profiling-$run-$i" --profile=TASK --constraint="cputype:xeon2630v2" ./run-profiler-job.sh "$@" --runId="matsim-berlin-6.3-$run"
   sleep 1 # https://slurm.schedmd.com/sbatch.html#SECTION_PERFORMANCE
 )
 
