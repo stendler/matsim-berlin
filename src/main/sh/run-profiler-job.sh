@@ -19,6 +19,9 @@ if [ -z "$SLURM_JOB_NAME" ]; then
   exit 2
 fi
 
+# jfr went out of disk to write - check potential directories, where it will write to
+df -h /tmp /fast /scratch
+
 echo "Running $SLURM_JOB_NAME for $USER"
 # use output dirs on fast storage
 output_dir="/fast/$USER/$SLURM_JOB_NAME/"
@@ -29,7 +32,5 @@ java -version
 printf "jfr version: "
 jfr version
 
+# last line for the exit code
 ./run-profiler.sh --output "$output_dir" "$@" --output "$output_dir/matsim-berlin" run
-
-# copy output to /work (incl log?)
-#cp --recursive --parents "$output_dir" "/work/$USER/"
