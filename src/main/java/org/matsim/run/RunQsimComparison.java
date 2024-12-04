@@ -13,6 +13,7 @@ import org.matsim.core.mobsim.framework.events.MobsimInitializedEvent;
 import org.matsim.core.mobsim.framework.listeners.MobsimBeforeCleanupListener;
 import org.matsim.core.mobsim.framework.listeners.MobsimInitializedListener;
 import org.matsim.profiling.ProfilingEventsModule;
+import org.matsim.profiling.ProfilingInstructionModule;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -50,6 +51,7 @@ public class RunQsimComparison extends OpenBerlinScenario {
 	@Override
 	protected void prepareControler(Controler controler) {
 
+		controler.addOverridingModule(new ProfilingInstructionModule());
 		controler.addOverridingModule(new ProfilingEventsModule());
 		controler.addOverridingModule(new AbstractModule() {
 			@Override
